@@ -83,4 +83,7 @@ const generateSchemaDefinition = (schema) => {
   return schemaType;
 };
 
-module.exports = { generateSchemaDefinition };
+const generateAttributesSchemaDefinition = (schema) => {
+}
+
+module.exports = { generateSchemaDefinition, generateAttributesSchemaDefinition };

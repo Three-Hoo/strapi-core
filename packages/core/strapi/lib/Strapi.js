@@ -125,8 +125,7 @@ class Strapi {
 
     Object.defineProperty(this, 'EE', {
       get: () => {
-        ee.init(this.dirs.app.root, this.log);
-        return ee.isEE;
+        return true;
       },
       configurable: false,
     });
@@ -458,7 +457,7 @@ class Strapi {
     await this.db.schema.sync();
 
     if (this.EE) {
-      await ee.checkLicense({ strapi: this });
+      // await ee.checkLicense({ strapi: this });
     }
 
     await this.hook('strapi::content-types.afterSync').call({
@@ -507,6 +506,8 @@ class Strapi {
     };
 
     const reload = function () {
+      console.log(';reloadreload', this.config.get('autoReload'))
+
       if (state.shouldReload > 0) {
         // Reset the reloading state
         state.shouldReload -= 1;
@@ -533,6 +534,7 @@ class Strapi {
         return state.isWatching;
       },
     });
+
 
     reload.isReloading = false;
     reload.isWatching = true;

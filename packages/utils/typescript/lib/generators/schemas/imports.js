@@ -3,29 +3,34 @@
 const { factory } = require('typescript');
 
 const imports = [];
+const typeImports = [];
 
 module.exports = {
-  getImports() {
-    return imports;
+  getImports(importTypes = 'imports') {
+    return importTypes === 'imports' ? imports : typeImports;
   },
 
-  addImport(type) {
-    const hasType = imports.includes(type);
+  addImport(type, importTypes = 'imports') {
+    let _imports = importTypes === 'imports' ? imports : typeImports;
+    const hasType = _imports.includes(type);
 
     if (!hasType) {
-      imports.push(type);
+      _imports.push(type);
     }
   },
 
-  generateImportDefinition() {
-    const formattedImports = imports.map((key) =>
+  generateImportDefinition(importTypes = 'imports') {
+    const _imports = importTypes === 'imports' ? imports : typeImports;
+    const formattedImports = _imports.map((key) =>
       factory.createImportSpecifier(false, undefined, factory.createIdentifier(key))
     );
 
     return factory.createImportDeclaration(
       undefined,
       factory.createImportClause(false, undefined, factory.createNamedImports(formattedImports)),
-      factory.createStringLiteral('@strapi/strapi'),
+      factory.createStringLiteral(
+        importTypes === 'imports' ? '@strapi/strapi' : './typing.d.ts',
+      ),
       undefined
     );
   },

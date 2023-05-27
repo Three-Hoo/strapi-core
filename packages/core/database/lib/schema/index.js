@@ -81,6 +81,7 @@ const createSchemaProvider = (db) => {
       const hash = await this.schemaStorage.hashSchema(schema);
 
       if (oldHash !== hash) {
+        throw new Error("如果不是预期，请检查数据库是否需要更新，如果是预期，请注释这行代码，执行完后再开放注释，这是风险操作");
         debug('Schema changed');
 
         return this.syncSchema();

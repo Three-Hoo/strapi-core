@@ -1,6 +1,7 @@
 import type Koa from 'koa';
 import { Database } from '@strapi/database';
 
+import type { winston } from '@strapi/logger';
 import type { StringMap } from './utils';
 import type { GenericController } from '../../../core-api/controller';
 import type { GenericService } from '../../../core-api/service';
@@ -21,7 +22,7 @@ interface CustomFieldServerOptions {
    * The existing Strapi data type the custom field uses
    */
   type: string;
-  
+
   /**
    * Settings for the input size in the Admin UI
    */
@@ -69,12 +70,12 @@ export interface Strapi {
    *
    * It returns all the registered services
    */
-  readonly services: StringMap<GenericService>;
+  readonly services: StringMap<AllServices>;
 
   /**
    * Find a service using its unique identifier
    */
-  service<T extends GenericService = GenericService>(uid: string): T | undefined;
+  service<T extends keyof AllServices>(uid: T): AllServices[T];
 
   /**
    * Getter for the Strapi controllers container
@@ -374,7 +375,7 @@ export interface Strapi {
   /**
    * Strapi logger used to send errors, warning or information messages
    */
-  log: any;
+  log: winston.Logger;
 
   /**
    * Used to manage cron within Strapi

@@ -11,8 +11,8 @@ const prettier = require('prettier');
 const chalk = require('chalk');
 const CLITable = require('cli-table3');
 
-const { generateImportDefinition } = require('./imports');
-const { generateSchemaDefinition } = require('./schema');
+const { generateImportDefinition, addImport } = require('./imports');
+const { generateSchemaDefinition, generateAttributesSchemaDefinition } = require('./schema');
 const { generateGlobalDefinition } = require('./global');
 const {
   getAllStrapiSchemas,
@@ -140,7 +140,6 @@ const generateSchemasDefinitions = async (options = {}) => {
     verbose = false,
     silent = false,
   } = options;
-
   const schemas = getAllStrapiSchemas(strapi);
 
   const schemasDefinitions = Object.values(schemas).map((schema) => ({
@@ -160,9 +159,20 @@ const generateSchemasDefinitions = async (options = {}) => {
     return acc;
   }, []);
 
+  // update import
+  Object.values(schemas).map(({ attributes }) => {
+    Object.values(attributes).forEach(({ type }) => {
+      addImport(getSchemaInterfaceName(type) + 'AttributeType', 'typeImports');
+    });
+  });
+
   const allDefinitions = [
     // Imports
     generateImportDefinition(),
+
+    factory.createIdentifier('\n'),
+
+    generateImportDefinition('typeImports'),
 
     // Add a newline after the import statement
     factory.createIdentifier('\n'),
@@ -171,7 +181,7 @@ const generateSchemasDefinitions = async (options = {}) => {
     ...formattedSchemasDefinitions,
 
     // Global
-    generateGlobalDefinition(schemasDefinitions),
+    generateGlobalDefinition(schemasDefinitions, strapi),
   ];
 
   const output = emitDefinitions(allDefinitions);

@@ -18,9 +18,7 @@ const apisRegistry = (strapi) => {
       }
 
       const api = strapi.container.get('modules').add(`api::${apiName}`, apiConfig);
-
       apis[apiName] = api;
-
       return apis[apiName];
     },
   };

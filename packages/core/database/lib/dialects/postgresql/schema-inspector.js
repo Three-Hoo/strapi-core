@@ -170,7 +170,6 @@ class PostgresqlSchemaInspector {
     const { rows } = await this.db.connection.raw(SQL_QUERIES.TABLE_LIST, [
       this.getDatabaseSchema(),
     ]);
-
     return rows.map((row) => row.table_name);
   }
 

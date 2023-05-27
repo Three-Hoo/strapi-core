@@ -17,7 +17,6 @@ const { validateDatabase } = require('./validations');
 class Database {
   constructor(config) {
     this.metadata = createMetadata(config.models);
-
     this.config = {
       connection: {},
       settings: {

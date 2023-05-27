@@ -241,6 +241,7 @@ module.exports = ({ strapi }) => {
         version,
         'full_documentation.json'
       );
+
       // Write the documentation to the file system
       await fs.ensureFile(fullDocJsonPath);
       await fs.writeJson(fullDocJsonPath, finalDocumentation, { spaces: 2 });
