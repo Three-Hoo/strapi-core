@@ -86,7 +86,7 @@
     "@strapi/database": "file:../database",
     "@strapi/generate-new": "4.10.5",
     "@strapi/generators": "4.10.5",
-    "@strapi/logger": "file:../../../../utils/logger",
+    "@strapi/logger": "4.10.5",
     "@strapi/permissions": "4.10.5",
     "@strapi/plugin-content-manager": "4.10.5",
     "@strapi/plugin-content-type-builder": "4.10.5",
