@@ -5,7 +5,6 @@ const path = require('path');
 const _ = require('lodash');
 const isDocker = require('is-docker');
 const ciEnv = require('ci-info');
-const { isUsingTypeScriptSync } = require('@strapi/typescript-utils');
 const { env } = require('@strapi/utils');
 const machineID = require('../../utils/machine-id');
 const { generateAdminUserHash } = require('./admin-user-hash');
@@ -52,8 +51,8 @@ module.exports = (strapi) => {
     docker: process.env.DOCKER || isDocker(),
     isCI: ciEnv.isCI,
     version: strapi.config.get('info.strapi'),
-    useTypescriptOnServer: isUsingTypeScriptSync(serverRootPath),
-    useTypescriptOnAdmin: isUsingTypeScriptSync(adminRootPath),
+    useTypescriptOnServer: require('@strapi/typescript-utils').isUsingTypeScriptSync(serverRootPath),
+    useTypescriptOnAdmin: require('@strapi/typescript-utils').isUsingTypeScriptSync(adminRootPath),
     projectId: uuid,
     isHostedOnStrapiCloud: env('STRAPI_HOSTING', null) === 'strapi.cloud',
   };
