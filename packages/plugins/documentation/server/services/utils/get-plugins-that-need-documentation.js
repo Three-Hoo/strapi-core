@@ -2,7 +2,7 @@
 
 const getPluginsThatNeedDocumentation = (config) => {
   // Default plugins that need documentation generated
-  const defaultPlugins = ['upload', 'users-permissions'];
+  const defaultPlugins = ['users-permissions'];
 
   // User specified plugins that need documentation generated
   const userPluginsConfig = config['x-strapi-config'].plugins;
