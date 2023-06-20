@@ -411,6 +411,11 @@ export interface Strapi {
    * Entity Service instance
    */
   entityService: any;
+
+  /**
+   *  Redis plugin
+   */
+  redis: any;
 }
 
 export interface Lifecycles {
