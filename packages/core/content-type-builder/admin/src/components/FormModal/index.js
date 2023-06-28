@@ -955,6 +955,8 @@ const FormModal = () => {
     contentTypeSchema: allDataSchema.contentType || {},
     customField,
   }).sections;
+
+  
   const baseForm = formToDisplay.base({
     data: modifiedData,
     type: attributeType,

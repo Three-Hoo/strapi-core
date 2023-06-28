@@ -20,6 +20,7 @@ function ListRow({
   firstLoopComponentUid,
   isFromDynamicZone,
   name,
+  annotation,
   onClick,
   relation,
   repeatable,
@@ -84,6 +85,11 @@ function ListRow({
         <Flex paddingLeft={2} gap={4}>
           <AttributeIcon type={src} customField={customField} />
           <Typography fontWeight="bold">{name}</Typography>
+        </Flex>
+      </td>
+      <td style={{ position: 'relative' }}>
+        <Flex paddingLeft={2} gap={4}>
+          <Typography fontWeight="bold">{annotation}</Typography>
         </Flex>
       </td>
       <td>

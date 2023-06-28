@@ -2,6 +2,7 @@
 // import { FormattedMessage } from 'react-intl';
 import getTrad from '../../../utils/getTrad';
 import { componentField, componentForm } from '../component';
+import { annotationField } from './annotationField';
 import { nameField } from './nameField';
 
 const baseForm = {
@@ -21,6 +22,7 @@ const baseForm = {
           sectionTitle: null,
           items: [
             nameField,
+            annotationField,
             {
               name: 'component',
               type: 'select-component',
@@ -82,6 +84,7 @@ const baseForm = {
           sectionTitle: null,
           items: [
             nameField,
+            annotationField,
             {
               intlLabel: {
                 id: 'global.type',
@@ -143,7 +146,7 @@ const baseForm = {
   enumeration() {
     return {
       sections: [
-        { sectionTitle: null, items: [nameField] },
+        { sectionTitle: null, items: [nameField, annotationField] },
         {
           sectionTitle: null,
           items: [
@@ -171,7 +174,7 @@ const baseForm = {
   media() {
     return {
       sections: [
-        { sectionTitle: null, items: [nameField] },
+        { sectionTitle: null, items: [nameField, annotationField] },
         {
           sectionTitle: null,
           items: [
@@ -220,6 +223,7 @@ const baseForm = {
           sectionTitle: null,
           items: [
             nameField,
+            annotationField,
             {
               intlLabel: {
                 id: getTrad('form.attribute.item.number.type'),
@@ -298,6 +302,7 @@ const baseForm = {
               size: 12,
               type: 'relation',
             },
+            annotationField,
           ],
         },
       ],
@@ -306,7 +311,7 @@ const baseForm = {
   string() {
     return {
       sections: [
-        { sectionTitle: null, items: [nameField] },
+        { sectionTitle: null, items: [nameField, annotationField] },
         {
           sectionTitle: null,
           items: [
@@ -352,7 +357,7 @@ const baseForm = {
   text() {
     return {
       sections: [
-        { sectionTitle: null, items: [nameField] },
+        { sectionTitle: null, items: [nameField, annotationField] },
         {
           sectionTitle: null,
           items: [

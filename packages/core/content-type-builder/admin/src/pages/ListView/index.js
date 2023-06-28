@@ -43,7 +43,7 @@ const ListView = () => {
   const attributes = get(modifiedData, mainDataTypeAttributesPath, []);
   const isFromPlugin = has(initialData, [firstMainDataPath, 'plugin']);
   const hasModelBeenModified = !isEqual(modifiedData, initialData);
-
+  
   const forTarget = isInContentTypeView ? 'contentType' : 'component';
 
   const handleClickAddComponentToDZ = (dynamicZoneTarget) => {

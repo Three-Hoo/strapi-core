@@ -86,6 +86,11 @@ function List({
             </Th>
             <Th>
               <Typography variant="sigma" textColor="neutral600">
+                {formatMessage({ id: 'global.annotation', defaultMessage: 'Annotation' })}
+              </Typography>
+            </Th>
+            <Th>
+              <Typography variant="sigma" textColor="neutral600">
                 {formatMessage({ id: 'global.type', defaultMessage: 'Type' })}
               </Typography>
             </Th>
@@ -131,6 +136,11 @@ function List({
                 <th>
                   <Typography variant="sigma" textColor="neutral600">
                     {formatMessage({ id: 'global.name', defaultMessage: 'Name' })}
+                  </Typography>
+                </th>
+                <th>
+                  <Typography variant="sigma" textColor="neutral600">
+                    {formatMessage({ id: 'global.annotation', defaultMessage: 'Annotation' })}
                   </Typography>
                 </th>
                 <th colSpan="2">

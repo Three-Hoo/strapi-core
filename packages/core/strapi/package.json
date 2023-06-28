@@ -89,7 +89,7 @@
     "@strapi/logger": "4.10.5",
     "@strapi/permissions": "4.10.5",
     "@strapi/plugin-content-manager": "4.10.5",
-    "@strapi/plugin-content-type-builder": "4.10.5",
+    "@strapi/plugin-content-type-builder": "file:../content-type-builder",
     "@strapi/plugin-email": "4.10.5",
     "@strapi/typescript-utils": "file:../../../../utils/typescript",
     "@strapi/utils": "4.10.5",
