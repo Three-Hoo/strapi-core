@@ -14,6 +14,15 @@ module.exports = [
   },
   {
     method: 'GET',
+    path: '/json',
+    handler: 'documentation.json',
+    config: {
+      auth: false,
+      middlewares: [restrictAccess],
+    },
+  },
+  {
+    method: 'GET',
     path: '/v:major(\\d+).:minor(\\d+).:patch(\\d+)',
     handler: 'documentation.index',
     config: {

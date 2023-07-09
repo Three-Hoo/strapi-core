@@ -33,6 +33,18 @@ module.exports = {
     }
   },
 
+  async json(ctx) {
+    const openAPISpecsPath = path.join(
+      strapi.dirs.app.extensions,
+      'documentation',
+      'documentation',
+      '1.0.0',
+      'full_documentation.json'
+    );
+
+    return ctx.send(require(openAPISpecsPath));
+  },
+
   async index(ctx, next) {
     try {
       /**
