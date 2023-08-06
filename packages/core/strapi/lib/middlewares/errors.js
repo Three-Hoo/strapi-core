@@ -9,6 +9,7 @@ const {
 
 module.exports = (/* _, { strapi } */) => {
   return async (ctx, next) => {
+    const start = Date.now();
     try {
       await next();
 
@@ -30,11 +31,13 @@ module.exports = (/* _, { strapi } */) => {
         return;
       }
 
-      strapi.log.error(error);
 
       const { status, body } = formatInternalError(error);
       ctx.status = status;
       ctx.body = body;
+
+      const delta = Math.ceil(Date.now() - start);
+      strapi.log.http(`${ctx.method} ${ctx.url} (${delta} ms) ${ctx.status} ${error} ${error?.details}`);
     }
   };
 };

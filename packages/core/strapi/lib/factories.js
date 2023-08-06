@@ -8,12 +8,12 @@ const { createRoutes } = require('./core-api/routes');
 
 const createCoreController = (uid, cfg = {}) => {
   return ({ strapi }) => {
-    const baseController = createController({
-      contentType: strapi.contentType(uid),
-    });
-
     const userCtrl = typeof cfg === 'function' ? cfg({ strapi }) : cfg;
-
+    const contentType = strapi.contentType(uid)
+    if (!contentType) {
+      return userCtrl
+    }
+    const baseController = createController({ contentType });
     for (const methodName of Object.keys(baseController)) {
       if (userCtrl[methodName] === undefined) {
         userCtrl[methodName] = baseController[methodName];
@@ -27,11 +27,16 @@ const createCoreController = (uid, cfg = {}) => {
 
 const createCoreService = (uid, cfg = {}) => {
   return ({ strapi }) => {
+    const contentType = strapi.contentType(uid)
+    const userService = typeof cfg === 'function' ? cfg({ strapi }) : cfg;
+    if (!contentType) {
+      return userService
+    }
+
     const baseService = createService({
-      contentType: strapi.contentType(uid),
+      contentType,
     });
 
-    const userService = typeof cfg === 'function' ? cfg({ strapi }) : cfg;
 
     for (const methodName of Object.keys(baseService)) {
       if (userService[methodName] === undefined) {
@@ -54,9 +59,11 @@ const createCoreRouter = (uid, cfg = {}) => {
     get routes() {
       if (!routes) {
         const contentType = strapi.contentType(uid);
-
+        if (!contentType) {
+          routes = []
+          return routes
+        }
         const defaultRoutes = createRoutes({ contentType });
-
         Object.keys(defaultRoutes).forEach((routeName) => {
           const defaultRoute = defaultRoutes[routeName];
 
