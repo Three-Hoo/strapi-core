@@ -31,13 +31,18 @@ module.exports = (/* _, { strapi } */) => {
         return;
       }
 
-
       const { status, body } = formatInternalError(error);
       ctx.status = status;
       ctx.body = body;
 
       const delta = Math.ceil(Date.now() - start);
-      strapi.log.http(`${ctx.method} ${ctx.url} (${delta} ms) ${ctx.status} ${error} ${error?.details}`);
+      strapi.log.http(
+        `${ctx.method} ${ctx.url} (${delta} ms) ${ctx.status} ${error} ${error?.details}`
+      );
+
+      if (status > 401) {
+        strapi.log.error(`${error} ${error?.details ? JSON.stringify(error?.details) : ''}`);
+      }
     }
   };
 };
